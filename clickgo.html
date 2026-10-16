@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClickGo — Internet Doʻkon & Marketplace Uzbekistan</title>
+
+  <!-- Apply saved theme before first paint (no flash) -->
+  <script>
+    try {
+      var th = localStorage.getItem('clickgo_theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      if (th === 'dark') document.documentElement.classList.add('dark');
+    } catch (e) {}
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    // Custom Tailwind Theme Configuration for ClickGo Brand
+
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#111111',
+              deep: '#080808',
+              lime: '#C6FF00',
+              limeHover: '#B5EB00',
+              lightBg: '#F7F7F4',
+              secondaryBg: '#EFEFEA',
+              border: '#E5E5E0',
+              textPrimary: '#181818',
+              textSecondary: '#777777',
+              success: '#16803D',
+              error: '#D92D20'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary-black: #19ff08;
+      --lime-accent: #C6FF00;
+      --lime-hover: #B5EB00;
+      --light-bg: #3f3f34;
+    }
+
+    body {
+      background-color: #F7F7F4;
+      color: #181818;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #EFEFEA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #111111;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C6FF00;
+    }
+
+    .lime-badge {
+      background-color: #C6FF00;
+      color: #111111;
+      font-weight: 700;
+    }
+
+    .lime-btn {
+      background-color: #C6FF00;
+      color: #111111;
+      transition: all 0.2s ease;
+    }
+    .lime-btn:hover {
+      background-color: #B5EB00;
+      transform: translateY(-1px);
+    }
+
+    .black-btn {
+      background-color: #111111;
+      color: #ffffff;
+      transition: all 0.2s ease;
+    }
+    .black-btn:hover {
+      background-color: #080808;
+      transform: translateY(-1px);
+    }
+
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Glassmorphism details */
+    .glass-header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .active-nav {
+      border-bottom: 3px solid #C6FF00;
+      font-weight: 700;
+    }
+
+    body, .glass-header, .bg-white, .bg-brand-lightBg {
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* ===================== DARK MODE ===================== */
+    html.dark { color-scheme: dark; }
+    html.dark body { background:#0d0d0d; color:#ededed; }
+    html.dark .glass-header { background: rgba(20,20,20,.92); }
+
+    /* Surfaces */
+    html.dark .bg-white { background-color:#171717 !important; }
+    html.dark .bg-brand-lightBg,
+    html.dark .bg-gray-100,
+    html.dark .hover\:bg-gray-100:hover,
+    html.dark .hover\:bg-gray-50:hover,
+    html.dark .hover\:bg-brand-lightBg:hover { background-color:#242424 !important; }
+    html.dark .bg-white\/80 { background-color:rgba(23,23,23,.8) !important; }
+    html.dark .bg-red-50 { background-color:#3b1515 !important; }
+    html.dark .bg-amber-50 { background-color:#3a2a0a !important; }
+    html.dark .bg-green-100 { background-color:#10301c !important; }
+
+    /* Borders */
+    html.dark .border, html.dark .border-t, html.dark .border-b,
+    html.dark .border-brand-border, html.dark .border-gray-100,
+    html.dark .border-red-200, html.dark .border-amber-200 { border-color:#2c2c2c !important; }
+    html.dark .hover\:border-black:hover { border-color:#C6FF00 !important; }
+
+    /* Text */
+    html.dark .text-brand-black,
+    html.dark .text-brand-textPrimary,
+    html.dark .text-black { color:#f5f5f5 !important; }
+    html.dark .text-gray-500, html.dark .text-gray-600,
+    html.dark .text-brand-textSecondary { color:#a3a3a3 !important; }
+    html.dark .text-gray-400 { color:#8a8a8a !important; }
+    html.dark .hover\:text-black:hover { color:#fff !important; }
+
+    /* Lime elements always keep dark text */
+    html.dark .lime-btn, html.dark .lime-badge, html.dark .bg-brand-lime { color:#111 !important; }
+
+    /* Dark buttons that would otherwise blend into the background */
+    html.dark .black-btn { background:#C6FF00; color:#111; }
+    html.dark .bg-brand-black.text-brand-lime { background-color:#262626; }
+    html.dark .focus\:ring-brand-black:focus { --tw-ring-color:#C6FF00; }
+
+    html.dark select option { background:#1f1f1f; color:#eee; }
+    html.dark ::-webkit-scrollbar-track { background:#171717; }
+    html.dark ::-webkit-scrollbar-thumb { background:#3a3a3a; }
+  </style>
+
+  <!-- React & React Router DOM Scripts -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, createContext, useContext, useRef } = React;
+
+    // --- LOCALIZATION DATA SYSTEM ---
+    const LOCALES = {
+      uz: {
+        deliveryTo: "Yetkazib berish:",
+        tashkent: "Toshkent shahri",
+        support: "Mijozlarni qoʻllab-quvvatlash: +998 71 200-00-00",
+        catalog: "Katalog",
+        searchPlaceholder: "Mahsulotlar, brendlar yoki toifalarni qidirish...",
+        cart: "Savat",
+        favorites: "Saralanganlar",
+        account: "Akkount",
+        login: "Kirish",
+        allCategories: "Barcha toifalar",
+        bestDeals: "Super Takliflar",
+        trending: "Ommabop mahsulotlar",
+        newArrivals: "Yangi kelganlar",
+        popularNow: "Ayni damda xaridorgir",
+        addToCart: "Savatga qoʻshish",
+        inCart: "Savatda mavjud",
+        buyNow: "Hoziroq sotib olish",
+        price: "Narxi",
+        som: "soʻm",
+        discount: "Chegirma",
+        inStock: "Mavjud",
+        outOfStock: "Qolmagan",
+        rating: "Baho",
+        reviews: "sharhlar",
+        filter: "Filtrlar",
+        sortBy: "Saralash",
+        sortPopularity: "Ommabopligi boʻyicha",
+        sortPriceLow: "Arzonroqdan qimmatroqqa",
+        sortPriceHigh: "Qimmatroqdan arzonroqqa",
+        sortNewest: "Yangi kelganlar boʻyicha",
+        clearFilters: "Filtrlarni tozalash",
+        emptyCart: "Savatingiz hozircha boʻsh",
+        emptyCartSub: "Bosh sahifaga oʻting va yoqqan mahsulotlarni tanlang",
+        continueShopping: "Xarid qilishda davom etish",
+        orderSummary: "Buyurtma hisobi",
+        subtotal: "Mahsulotlar summasi",
+        deliveryFee: "Yetkazib berish",
+        free: "Bepul",
+        promoCode: "Promokod bor",
+        apply: "Kiritish",
+        total: "Jami toʻlov",
+        checkout: "Rasmiylashtirishga oʻtish",
+        checkoutTitle: "Buyurtmani rasmiylashtirish",
+        fullName: "F.I.SH.",
+        phone: "Telefon raqami",
+        city: "Shahar / Viloyat",
+        address: "Yetkazib berish manzili",
+        paymentMethod: "Toʻlov usuli",
+        cashOnDelivery: "Topshirganda naqd yoki karta",
+        cardSimulation: "Uzcard / Humo / Visa (Demo)",
+        placeOrder: "Buyurtmani tasdiqlash",
+        orderSuccess: "Buyurtmangiz muvaffaqiyatli qabul qilindi!",
+        orderNumber: "Buyurtma raqami:",
+        demoWarning: "Diqqat: Bu test rejimi. Haqiqiy toʻlov va yetkazib berish amalga oshirilmaydi.",
+        ordersHistory: "Buyurtmalar tarixi",
+        profile: "Mening profilim",
+        logout: "Chiqish",
+        specs: "Xususiyatlari",
+        description: "Tavsif",
+        guarantee: "Rasmiy kafolat 12 oy",
+        fastDelivery: "Toshkent boʻylab 24 soatda yetkazib berish"
+      },
+      ru: {
+        deliveryTo: "Доставка:",
+        tashkent: "г. Ташкент",
+        support: "Служба поддержки: +998 71 200-00-00",
+        catalog: "Каталог",
+        searchPlaceholder: "Искать товары, бренды или категории...",
+        cart: "Корзина",
+        favorites: "Избранное",
+        account: "Кабинет",
+        login: "Войти",
+        allCategories: "Все категории",
+        bestDeals: "Супер Цены",
+        trending: "Тренды сезона",
+        newArrivals: "Новинки",
+        popularNow: "Популярное сейчас",
+        addToCart: "В корзину",
+        inCart: "В корзине",
+        buyNow: "Купить сейчас",
+        price: "Цена",
+        som: "сум",
+        discount: "Скидка",
+        inStock: "В наличии",
+        outOfStock: "Нет в наличии",
+        rating: "Рейтинг",
+        reviews: "отзывов",
+        filter: "Фильтры",
+        sortBy: "Сортировка",
+        sortPopularity: "По популярности",
+        sortPriceLow: "Сначала дешевле",
+        sortPriceHigh: "Сначала дороже",
+        sortNewest: "По новизне",
+        clearFilters: "Сбросить фильтры",
+        emptyCart: "Ваша корзина пока пуста",
+        emptyCartSub: "Перейдите на главную страницу и выберите понравившиеся товары",
+        continueShopping: "Продолжить покупки",
+        orderSummary: "Детали заказа",
+        subtotal: "Стоимость товаров",
+        deliveryFee: "Доставка",
+        free: "Бесплатно",
+        promoCode: "Есть промокод?",
+        apply: "Применить",
+        total: "Итого к оплате",
+        checkout: "Оформить заказ",
+        checkoutTitle: "Оформление заказа",
+        fullName: "Ф.И.О.",
+        phone: "Номер телефона",
+        city: "Город / Регион",
+        address: "Адрес доставки",
+        paymentMethod: "Способ оплаты",
+        cashOnDelivery: "Оплата при получении (наличные/карта)",
+        cardSimulation: "Uzcard / Humo / Visa (Демо)",
+        placeOrder: "Подтвердить заказ",
+        orderSuccess: "Ваш заказ успешно оформлен!",
+        orderNumber: "Номер заказа:",
+        demoWarning: "Внимание: Это демо-режим. Реальное списание средств не производится.",
+        ordersHistory: "История заказов",
+        profile: "Мой профиль",
+        logout: "Выйти",
+        specs: "Характеристики",
+        description: "Описание",
+        guarantee: "Официальная гарантия 12 месяцев",
+        fastDelivery: "Быстрая доставка по Ташкенту за 24 часа"
+      },
+      en: {
+        deliveryTo: "Deliver to:",
+        tashkent: "Tashkent city",
+        support: "Support: +998 71 200-00-00",
+        catalog: "Catalog",
+        searchPlaceholder: "Search products, brands or categories...",
+        cart: "Cart",
+        favorites: "Favorites",
+        account: "Account",
+        login: "Sign In",
+        allCategories: "All Categories",
+        bestDeals: "Super Deals",
+        trending: "Trending Now",
+        newArrivals: "New Arrivals",
+        popularNow: "Most Popular",
+        addToCart: "Add to Cart",
+        inCart: "In Cart",
+        buyNow: "Buy Now",
+        price: "Price",
+        som: "UZS",
+        discount: "Discount",
+        inStock: "In Stock",
+        outOfStock: "Out of Stock",
+        rating: "Rating",
+        reviews: "reviews",
+        filter: "Filters",
+        sortBy: "Sort by",
+        sortPopularity: "By Popularity",
+        sortPriceLow: "Price: Low to High",
+        sortPriceHigh: "Price: High to Low",
+        sortNewest: "Newest First",
+        clearFilters: "Clear Filters",
+        emptyCart: "Your cart is currently empty",
+        emptyCartSub: "Go back to home page and explore our awesome catalog",
+        continueShopping: "Continue Shopping",
+        orderSummary: "Order Summary",
+        subtotal: "Items total",
+        deliveryFee: "Delivery fee",
+        free: "Free",
+        promoCode: "Have a promo code?",
+        apply: "Apply",
+        total: "Grand Total",
+        checkout: "Proceed to Checkout",
+        checkoutTitle: "Checkout Order",
+        fullName: "Full Name",
+        phone: "Phone Number",
+        city: "City / Region",
+        address: "Delivery Address",
+        paymentMethod: "Payment Method",
+        cashOnDelivery: "Cash or Terminal on Delivery",
+        cardSimulation: "Uzcard / Humo / Visa (Demo)",
+        placeOrder: "Confirm Order",
+        orderSuccess: "Your order has been placed successfully!",
+        orderNumber: "Order ID:",
+        demoWarning: "Notice: Demo Mode. No real financial charges or deliveries are performed.",
+        ordersHistory: "Order History",
+        profile: "My Profile",
+        logout: "Logout",
+        specs: "Specifications",
+        description: "Description",
+        guarantee: "Official 12-month Warranty",
+        fastDelivery: "Express delivery in Tashkent within 24h"
+      }
+    };
+
+    // --- CATEGORIES MOCK DATA ---
+    const CATEGORIES = [
+      { id: 'electronics', name: { uz: 'Elektronika', ru: 'Электроника', en: 'Electronics' }, icon: 'laptop', color: 'bg-blue-500' },
+      { id: 'smartphones', name: { uz: 'Smartfonlar va gadjetlar', ru: 'Смартфоны и гаджеты', en: 'Smartphones & Gadgets' }, icon: 'smartphone', color: 'bg-purple-500' },
+      { id: 'home', name: { uz: 'Uy va oshxona', ru: 'Дом и кухня', en: 'Home & Kitchen' }, icon: 'home', color: 'bg-emerald-500' },
+      { id: 'fashion', name: { uz: 'Kiym va poyabzal', ru: 'Oдежда и обувь', en: 'Fashion & Clothes' }, icon: 'shirt', color: 'bg-pink-500' },
+      { id: 'beauty', name: { uz: 'Goʻzallik va parvarish', ru: 'Красота и уход', en: 'Beauty & Care' }, icon: 'sparkles', color: 'bg-rose-500' },
+      { id: 'sports', name: { uz: 'Sport va hordiq', ru: 'Спорт и отдых', en: 'Sports & Outdoors' }, icon: 'dumbbell', color: 'bg-amber-500' },
+      { id: 'appliances', name: { uz: 'Maishiy texnika', ru: 'Бытовая техника', en: 'Home Appliances' }, icon: 'tv', color: 'bg-cyan-500' },
+      { id: 'kids', name: { uz: 'Bolalar tovarlari', ru: 'Детские товары', en: 'Kids & Toys' }, icon: 'baby', color: 'bg-indigo-500' }
+    ];
+
+    // --- COMPREHENSIVE MOCK PRODUCTS DATASET (40 Products) ---
+    const MOCK_PRODUCTS = [
+      {
+        id: 101,
+        slug: "apple-iphone-15-pro-max-256gb",
+        name: { uz: "Apple iPhone 15 Pro Max 256GB Natural Titanium", ru: "Apple iPhone 15 Pro Max 256GB Натуральный Титан", en: "Apple iPhone 15 Pro Max 256GB Natural Titanium" },
+        categoryId: "smartphones",
+        brand: "Apple",
+        price: 15400000,
+        oldPrice: 16800000,
+        discountPercentage: 8,
+        rating: 4.9,
+        reviewCount: 142,
+        stock: 12,
+        isFeatured: true,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=800&q=80"
+        ],
+        description: {
+          uz: "A17 Pro chipiga ega, titan korpusli hamda eng ilg'or professional kamera tizimiga ega eng kuchli iPhone.",
+          ru: "Флагманский смартфон в титановом корпусе с процессором A17 Pro и мощнейшей камерой.",
+          en: "The ultimate iPhone with aerospace-grade titanium design, A17 Pro chip, and pro camera system."
+        },
+        specs: { "RAM": "8 GB", "Storage": "256 GB", "Battery": "4422 mAh", "Display": "6.7 inch OLED 120Hz" }
+      },
+      {
+        id: 102,
+        slug: "samsung-galaxy-s24-ultra-512gb",
+        name: { uz: "Samsung Galaxy S24 Ultra 12/512GB Titanium Gray", ru: "Samsung Galaxy S24 Ultra 12/512GB Титановый Серый", en: "Samsung Galaxy S24 Ultra 12/512GB Titanium Gray" },
+        categoryId: "smartphones",
+        brand: "Samsung",
+        price: 14200000,
+        oldPrice: 15900000,
+        discountPercentage: 10,
+        rating: 4.8,
+        reviewCount: 98,
+        stock: 8,
+        isFeatured: true,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Galaxy AI imkoniyatlari, S Pen qalami va 200MP kameraga ega zamonaviy flaqman smartfon.",
+          ru: "Флагман со встроенным искусственным интеллектом Galaxy AI и стилусом S Pen.",
+          en: "Flagship smartphone featuring Galaxy AI, S Pen support and 200MP sensor camera."
+        },
+        specs: { "RAM": "12 GB", "Storage": "512 GB", "Processor": "Snapdragon 8 Gen 3", "Battery": "5000 mAh" }
+      },
+      {
+        id: 103,
+        slug: "macbook-air-15-m2-8-256",
+        name: { uz: "MacBook Air 15 M2 8GB / 256GB Midnight", ru: "MacBook Air 15 M2 8GB / 256GB Темная ночь", en: "MacBook Air 15 M2 8GB / 256GB Midnight" },
+        categoryId: "electronics",
+        brand: "Apple",
+        price: 15200000,
+        oldPrice: 16500000,
+        discountPercentage: 7,
+        rating: 4.9,
+        reviewCount: 64,
+        stock: 5,
+        isFeatured: true,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Yupqa va yengil 15 dyuymli displey va M2 chipi bilan jihozlangan noutbuk. 18 soatgacha batareya ishlash vaqti.",
+          ru: "Ультратонкий 15-дюймовый ноутбук на базе мощного чипа Apple M2 с потрясающей автономностью.",
+          en: "Incredibly thin 15-inch laptop powered by Apple M2 chip with up to 18 hours battery life."
+        },
+        specs: { "CPU": "Apple M2", "RAM": "8 GB", "SSD": "256 GB", "Screen": "15.3 inch Liquid Retina" }
+      },
+      {
+        id: 104,
+        slug: "sony-wh-1000xm5-black",
+        name: { uz: "Sony WH-1000XM5 Shovqinni Bosuvchi Quloqchinlar", ru: "Беспроводные наушники Sony WH-1000XM5 Черные", en: "Sony WH-1000XM5 Wireless Noise Canceling Headphones" },
+        categoryId: "electronics",
+        brand: "Sony",
+        price: 4300000,
+        oldPrice: 4800000,
+        discountPercentage: 10,
+        rating: 4.7,
+        reviewCount: 112,
+        stock: 15,
+        isFeatured: true,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Bozordagi eng yaxshi faol shovqin bosish tizimi va yuqori sifatli tiniq ovoz uzatish moslamasi.",
+          ru: "Лидер среди наушников с активным шумоподавлением и невероятно четким звучанием.",
+          en: "Industry-leading noise cancellation and premium high-resolution sound quality."
+        },
+        specs: { "Battery Life": "30 Hours", "Bluetooth": "5.2", "Noise Cancelling": "Auto NC Optimizer" }
+      },
+      {
+        id: 105,
+        slug: "dyson-v15-detect-absolute",
+        name: { uz: "Dyson V15 Detect Absolute Lazerli Changyutgich", ru: "Беспроводной пылесос Dyson V15 Detect Absolute", en: "Dyson V15 Detect Absolute Cordless Vacuum" },
+        categoryId: "appliances",
+        brand: "Dyson",
+        price: 9800000,
+        oldPrice: 11200000,
+        discountPercentage: 12,
+        rating: 4.9,
+        reviewCount: 52,
+        stock: 6,
+        isFeatured: true,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Lazer yoritgichi va mikro chang zarralarini hisoblovchi datchikka ega aqlli simsiz changyutgich.",
+          ru: "Умный беспроводной пылесос с лазерной подсветкой пыли и пьезодатчиком контроля чистки.",
+          en: "Intelligent cordless vacuum with laser particle detection and Piezo sensor power optimization."
+        },
+        specs: { "Suction Power": "230 AW", "Runtime": "60 Mins", "Weight": "3.0 kg" }
+      },
+      {
+        id: 106,
+        slug: "nike-air-jordan-1-retro-high",
+        name: { uz: "Krossovkalar Nike Air Jordan 1 Retro High OG", ru: "Кроссовки Nike Air Jordan 1 Retro High OG", en: "Nike Air Jordan 1 Retro High OG Sneakers" },
+        categoryId: "fashion",
+        brand: "Nike",
+        price: 2100000,
+        oldPrice: 2500000,
+        discountPercentage: 16,
+        rating: 4.8,
+        reviewCount: 210,
+        stock: 20,
+        isFeatured: false,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Afsonaviy basketbol dizayni, tabiiy charm va qulay amortizatsiya tizimi.",
+          ru: "Легендарные баскетбольные кроссовки из премиальной кожи в классической расцветке.",
+          en: "Iconic high-top basketball style crafted with real premium leather upper."
+        },
+        specs: { "Material": "Natural Leather", "Sole": "Rubber", "Sizes": "40-45 EUR" }
+      },
+      {
+        id: 107,
+        slug: "playstation-5-slim-digital",
+        name: { uz: "O'yin konsoli Sony PlayStation 5 Slim Digital Edition", ru: "Игровая приставка Sony PlayStation 5 Slim Digital", en: "Sony PlayStation 5 Slim Digital Console" },
+        categoryId: "electronics",
+        brand: "Sony",
+        price: 6400000,
+        oldPrice: 7100000,
+        discountPercentage: 10,
+        rating: 4.9,
+        reviewCount: 180,
+        stock: 9,
+        isFeatured: true,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Ixcham o'lcham, 1TB SSD xotira va 4K 120Hz tezlikda o'yinlar o'ynash imkoniyati.",
+          ru: "Компактная версия популярной консоли с накопителем 1ТБ и поддержкой 4K 120 Гц.",
+          en: "Compact next-gen gaming console with 1TB ultra-high speed SSD storage."
+        },
+        specs: { "Storage": "1TB SSD", "Resolution": "Up to 4K 120 FPS", "HDR": "Yes" }
+      },
+      {
+        id: 108,
+        slug: "xiaomi-robot-vacuum-x10",
+        name: { uz: "Robot-changyutgich Xiaomi Robot Vacuum X10+", ru: "Робот-пылесос Xiaomi Robot Vacuum X10+", en: "Xiaomi Robot Vacuum X10+ Auto Cleaning" },
+        categoryId: "appliances",
+        brand: "Xiaomi",
+        price: 7200000,
+        oldPrice: 8300000,
+        discountPercentage: 13,
+        rating: 4.6,
+        reviewCount: 44,
+        stock: 7,
+        isFeatured: false,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Avtomatik zaryadlash va suv almashtirish stantsiyasiga ega to'liq avtonom robot changyutgich.",
+          ru: "Полностью автоматизированный робот-пылесос со станцией самоочистки и влажной уборкой.",
+          en: "Fully automated smart robot vacuum cleaner with auto-emptying station."
+        },
+        specs: { "Suction": "4000 Pa", "Navigation": "LDS Laser", "Battery": "5200 mAh" }
+      },
+      {
+        id: 109,
+        slug: "apple-watch-ultra-2-titanium",
+        name: { uz: "Aqlli soat Apple Watch Ultra 2 GPS + Cellular 49mm", ru: "Умные часы Apple Watch Ultra 2 Titanium 49mm", en: "Apple Watch Ultra 2 GPS + Cellular 49mm Titanium" },
+        categoryId: "smartphones",
+        brand: "Apple",
+        price: 10500000,
+        oldPrice: 11500000,
+        discountPercentage: 8,
+        rating: 4.9,
+        reviewCount: 38,
+        stock: 10,
+        isFeatured: false,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Ekstremal sport va sarguzashtlar uchun titan korpusli eng chidamli aqlli soat.",
+          ru: "Самые прочные и функциональные часы Apple в титановом корпусе для спорта и путешествий.",
+          en: "The most capable Apple Watch with rugged titanium case and 3000 nits display."
+        },
+        specs: { "Case": "49mm Titanium", "Display": "Retina 3000 nits", "Water Resistance": "100m" }
+      },
+      {
+        id: 110,
+        slug: "nespresso-vertuo-pop-coffee",
+        name: { uz: "Kofe mashinasi Nespresso Vertuo Pop Black", ru: "Кофемашина капсульная Nespresso Vertuo Pop", en: "Nespresso Vertuo Pop Espresso Coffee Machine" },
+        categoryId: "home",
+        brand: "Nespresso",
+        price: 1850000,
+        oldPrice: 2200000,
+        discountPercentage: 15,
+        rating: 4.5,
+        reviewCount: 29,
+        stock: 14,
+        isFeatured: false,
+        isPopular: false,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1517668808822-9e4288246d76?auto=format&fit=crop&w=600&q=80",
+        gallery: ["https://images.unsplash.com/photo-1517668808822-9e4288246d76?auto=format&fit=crop&w=800&q=80"],
+        description: {
+          uz: "Bir tugmani bosish orqali xushbo'y va quyuq ko'pikli qahva tayyorlaydigan ixcham apparat.",
+          ru: "Яркая и компактная капсульная кофемашина для создания идеального эспрессо с плотной пенкой.",
+          en: "Compact capsule coffee system with Centrifusion technology for versatile coffee sizes."
+        },
+        specs: { "Water Tank": "0.6 L", "Heat Up": "30 Seconds", "Capsule Type": "Vertuo" }
+      },
+      // Generating 30 additional diverse items to reach 40 products
+      {
+        id: 111,
+        slug: "dell-xps-13-plus-9320",
+        name: { uz: "Dell XPS 13 Plus Intel Core i7 16GB 512GB", ru: "Ноутбук Dell XPS 13 Plus Intel i7 / 16GB / 512GB", en: "Dell XPS 13 Plus Laptop Intel i7 16GB 512GB" },
+        categoryId: "electronics",
+        brand: "Dell",
+        price: 18900000,
+        oldPrice: 21000000,
+        discountPercentage: 10,
+        rating: 4.6,
+        reviewCount: 19,
+        stock: 4,
+        isFeatured: false,
+        isPopular: false,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Premium dizaynga ega o'ta kuchli biznes ultrabuk.", ru: "Премиальный бизнес-ультрабук с сенсорной стеклянной панелью.", en: "Futuristic ultra-thin laptop crafted with sleek materials." },
+        specs: { "CPU": "Intel i7-1360P", "RAM": "16GB LPDDR5", "Display": "3.5K OLED Touch" }
+      },
+      {
+        id: 112,
+        slug: "lg-oled-55-c3-4k-smart-tv",
+        name: { uz: "Televizor LG OLED 55 C3 4K Smart TV", ru: "Телевизор LG OLED 55 C3 4K Smart TV", en: "LG 55 Inch C3 4K Smart OLED TV" },
+        categoryId: "appliances",
+        brand: "LG",
+        price: 16500000,
+        oldPrice: 18500000,
+        discountPercentage: 10,
+        rating: 4.9,
+        reviewCount: 41,
+        stock: 6,
+        isFeatured: true,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Mukammal qora rang va cheksiz kontrast beruvchi OLED ekran.", ru: "Идеальный черный цвет и невероятный контраст благодаря технологии самосветящихся пикселей.", en: "Self-lit OLED pixels deliver infinite contrast and deep blacks." },
+        specs: { "Refresh Rate": "120Hz", "HDR": "Dolby Vision", "Processor": "a9 Gen6 AI" }
+      },
+      {
+        id: 113,
+        slug: "ipad-air-5-m1-64gb-space-gray",
+        name: { uz: "Planhet Apple iPad Air 5 M1 64GB Space Gray", ru: "Планшет Apple iPad Air 5 M1 64GB Серый Космос", en: "Apple iPad Air 5th Gen M1 64GB Space Gray" },
+        categoryId: "smartphones",
+        brand: "Apple",
+        price: 7800000,
+        oldPrice: 8500000,
+        discountPercentage: 8,
+        rating: 4.8,
+        reviewCount: 88,
+        stock: 11,
+        isFeatured: false,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "M1 chipining misli ko'rilmagan quvvati yengil planshet korpusida.", ru: "Мощность процессора M1 в тонком и легком корпусе.", en: "Turbocharged by the Apple M1 chip with 10.9-inch Liquid Retina." },
+        specs: { "Chip": "Apple M1", "Display": "10.9 inch", "Weight": "461g" }
+      },
+      {
+        id: 114,
+        slug: "chanel-bleu-de-chanel-parfum-100ml",
+        name: { uz: "Atir Bleu de Chanel Parfum 100ml", ru: "Духи Bleu de Chanel Parfum 100мл", en: "Bleu de Chanel Parfum Spray 100ml" },
+        categoryId: "beauty",
+        brand: "Chanel",
+        price: 2400000,
+        oldPrice: 2800000,
+        discountPercentage: 14,
+        rating: 4.9,
+        reviewCount: 77,
+        stock: 18,
+        isFeatured: true,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Erkaklar uchun olijanob va teran yog'ochli-tsitrus ifori.", ru: "Благородный древесный аромат с выразительными нотами сандала.", en: "An intense woody fragrance opening with freshness and sandalwood." },
+        specs: { "Volume": "100 ml", "Type": "Parfum", "Gender": "Men" }
+      },
+      {
+        id: 115,
+        slug: "dyson-airwrap-complete-long",
+        name: { uz: "Stayler Dyson Airwrap Multi-Styler Complete Long", ru: "Стайлер Dyson Airwrap Complete Long Nickel/Copper", en: "Dyson Airwrap Multi-Styler Complete Long Nickel" },
+        categoryId: "beauty",
+        brand: "Dyson",
+        price: 7600000,
+        oldPrice: 8400000,
+        discountPercentage: 9,
+        rating: 4.9,
+        reviewCount: 165,
+        stock: 8,
+        isFeatured: true,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Sochlarni haddan tashqari qizdirmasdan shakllantiruvchi mo'jizaviy stayler.", ru: "Укладка волос без экстремальных температур с помощью потока воздуха.", en: "Style hair using Coanda airflow without extreme heat damage." },
+        specs: { "Power": "1300 W", "Attachments": "6 pieces", "Cable": "2.68 m" }
+      },
+      {
+        id: 116,
+        slug: "adidas-ultraboost-light-running",
+        name: { uz: "Yugurish poyabzali Adidas Ultraboost Light", ru: "Кроссовки для бега Adidas Ultraboost Light", en: "Adidas Ultraboost Light Running Shoes" },
+        categoryId: "sports",
+        brand: "Adidas",
+        price: 1850000,
+        oldPrice: 2200000,
+        discountPercentage: 15,
+        rating: 4.7,
+        reviewCount: 54,
+        stock: 16,
+        isFeatured: false,
+        isPopular: false,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Eng yengil Boost materialiga ega qulay yugurish krossovkalari.", ru: "Самая легкая система амортизации Light BOOST для максимального комфорта.", en: "Lightest Boost cushioning ever designed for responsive running." },
+        specs: { "Type": "Running", "Drop": "10mm", "Weight": "299g" }
+      },
+      {
+        id: 117,
+        slug: "samsung-side-by-side-refrigerator",
+        name: { uz: "Muzlatgich Samsung Side-by-Side 647L", ru: "Холодильник Samsung Side-by-Side 647L Инвертор", en: "Samsung Side-by-Side Refrigerator 647L Inverter" },
+        categoryId: "appliances",
+        brand: "Samsung",
+        price: 14800000,
+        oldPrice: 16900000,
+        discountPercentage: 12,
+        rating: 4.8,
+        reviewCount: 31,
+        stock: 3,
+        isFeatured: false,
+        isPopular: false,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "SpaceMax texnologiyasiga ega katta hajmli zamonaviy muzlatgich.", ru: "Вместительный двухдверный холодильник с инверторным компрессором.", en: "Large capacity refrigerator featuring SpaceMax technology." },
+        specs: { "Volume": "647 Liters", "Compressor": "Digital Inverter", "NoFrost": "Yes" }
+      },
+      {
+        id: 118,
+        slug: "lego-technic-bugatti-bolide",
+        name: { uz: "Lego Technic Bugatti Bolide Konstruktor", ru: "Конструктор LEGO Technic Bugatti Bolide", en: "LEGO Technic Bugatti Bolide Building Kit" },
+        categoryId: "kids",
+        brand: "LEGO",
+        price: 890000,
+        oldPrice: 1100000,
+        discountPercentage: 19,
+        rating: 4.9,
+        reviewCount: 93,
+        stock: 25,
+        isFeatured: false,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Ishlaydigan porshenli W16 dvigateliga ega haqiqiy poyga avtomobili modeli.", ru: "Детализированная модель гиперкара с работающим поршневым двигателем W16.", en: "Authentic model car featuring working W16 engine and scissor doors." },
+        specs: { "Pieces": "905 pcs", "Age": "9+", "Dimensions": "31 cm long" }
+      },
+      {
+        id: 119,
+        slug: "stanley-quencher-h2o-tumbler-1.2l",
+        name: { uz: "Termos-kroshka Stanley Quencher H2.O 1.2L", ru: "Термокружка Stanley Quencher H2.O FlowState 1.2L", en: "Stanley Quencher H2.O FlowState Tumbler 1.2L" },
+        categoryId: "home",
+        brand: "Stanley",
+        price: 680000,
+        oldPrice: 850000,
+        discountPercentage: 20,
+        rating: 4.8,
+        reviewCount: 140,
+        stock: 30,
+        isFeatured: true,
+        isPopular: true,
+        isNew: true,
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "Ichimliklarni 11 soat davomida muzday saqlaydigan trenddagi termo-stakan.", ru: "Трендовый стакан-термос, удерживающий холод до 11 часов.", en: "Trending vacuum insulated tumbler keeping drinks cold for 11 hours." },
+        specs: { "Capacity": "1.2 Liters", "Cold retention": "11 Hours", "Material": "Stainless Steel" }
+      },
+      {
+        id: 120,
+        slug: "xiaomi-mi-smart-band-8-black",
+        name: { uz: "Fitnes bilaguzuk Xiaomi Smart Band 8", ru: "Фитнес-браслет Xiaomi Smart Band 8 Черный", en: "Xiaomi Smart Band 8 Fitness Tracker Black" },
+        categoryId: "smartphones",
+        brand: "Xiaomi",
+        price: 490000,
+        oldPrice: 580000,
+        discountPercentage: 15,
+        rating: 4.7,
+        reviewCount: 310,
+        stock: 40,
+        isFeatured: false,
+        isPopular: true,
+        isNew: false,
+        image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80",
+        description: { uz: "60Hz AMOLED ekran va 150 dan ortiq sport rejimiga ega bilaguzuk.", ru: "Яркий экран AMOLED 60 Гц и более 150 спортивных режимов.", en: "Smooth 60Hz AMOLED screen with 150+ workout modes." },
+        specs: { "Screen": "1.62 inch AMOLED", "Battery": "Up to 16 days", "Waterproof": "5 ATM" }
+      }
+    ];
+
+    // Helper to generate additional items dynamically up to 40
+    for(let i = 121; i <= 140; i++) {
+      const cats = ['electronics', 'smartphones', 'home', 'fashion', 'beauty', 'sports', 'appliances', 'kids'];
+      const cat = cats[i % cats.length];
+      const brands = ['Samsung', 'Apple', 'Xiaomi', 'Nike', 'Zara', 'Bosch', 'Philips', 'LG'];
+      const brand = brands[i % brands.length];
+      const basePrice = (i * 120000) + 150000;
+
+      MOCK_PRODUCTS.push({
+        id: i,
+        slug: `product-item-${i}`,
+        name: {
+          uz: `${brand} Premium Mahsulot N-` + i,
+          ru: `Премиум Товар ${brand} №` + i,
+          en: `${brand} Premium Merchandise #${i}`
+        },
+        categoryId: cat,
+        brand: brand,
+        price: basePrice,
+        oldPrice: Math.round(basePrice * 1.15),
+        discountPercentage: 13,
+        rating: (4.0 + (i % 10) * 0.1).toFixed(1),
+        reviewCount: 15 + (i * 3),
+        stock: 5 + (i % 15),
+        isFeatured: i % 3 === 0,
+        isPopular: i % 2 === 0,
+        isNew: i % 4 === 0,
+        image: `https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80`,
+        gallery: [`https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80`],
+        description: {
+          uz: `Ushbu ${brand} mahsuloti yuqori sifat va zamonaviy ergonomik dizaynni o'zida mukammal birlashtirgan.`,
+          ru: `Этот товар от ${brand} сочетает в себе высокое качество и современный удобный дизайн.`,
+          en: `This item by ${brand} uniquely blends high build quality with modern ergonomics.`
+        },
+        specs: { "Model": `CGO-${i}`, "Warranty": "12 Months", "Origin": "Official Import" }
+      });
+    }
+
+    // --- CURRENCY FORMATTER UTILITY ---
+    const formatUZS = (price) => {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " soʻm";
+    };
+
+    const AppContext = createContext();
+
+    const AppProvider = ({ children }) => {
+      // Language state
+      const [lang, setLang] = useState(() => localStorage.getItem('clickgo_lang') || 'uz');
+      useEffect(() => { localStorage.setItem('clickgo_lang', lang); }, [lang]);
+
+      // Theme state (light / dark)
+      const [theme, setTheme] = useState(() => {
+        try {
+          return localStorage.getItem('clickgo_theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        } catch (e) { return 'light'; }
+      });
+      useEffect(() => {
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        try { localStorage.setItem('clickgo_theme', theme); } catch (e) {}
+      }, [theme]);
+      const toggleTheme = () => setTheme(p => (p === 'dark' ? 'light' : 'dark'));
+
+      // Cart state
+      const [cart, setCart] = useState(() => {
+        try {
+          return JSON.parse(localStorage.getItem('clickgo_cart')) || [];
+        } catch(e) { return []; }
+      });
+      useEffect(() => { localStorage.setItem('clickgo_cart', JSON.stringify(cart)); }, [cart]);
+
+      // Favorites state
+      const [favorites, setFavorites] = useState(() => {
+        try {
+          return JSON.parse(localStorage.getItem('clickgo_favorites')) || [];
+        } catch(e) { return []; }
+      });
+      useEffect(() => { localStorage.setItem('clickgo_favorites', JSON.stringify(favorites)); }, [favorites]);
+
+      // Orders History
+      const [orders, setOrders] = useState(() => {
+        try {
+          return JSON.parse(localStorage.getItem('clickgo_orders')) || [
+            {
+              id: "CGO-98412",
+              date: "2026-03-10",
+              total: 15400000,
+              status: "Delivered",
+              items: [{ id: 101, name: "Apple iPhone 15 Pro Max 256GB", quantity: 1, price: 15400000 }]
+            }
+          ];
+        } catch(e) { return []; }
+      });
+      useEffect(() => { localStorage.setItem('clickgo_orders', JSON.stringify(orders)); }, [orders]);
+
+      // Toast notification system
+      const [toast, setToast] = useState(null);
+      const showToast = (message) => {
+        setToast(message);
+        setTimeout(() => setToast(null), 3000);
+      };
+
+      // Cart Helpers
+      const addToCart = (product, quantity = 1) => {
+        setCart(prev => {
+          const existing = prev.find(item => item.id === product.id);
+          if (existing) {
+            return prev.map(item => item.id === product.id 
+              ? { ...item, quantity: Math.min(item.quantity + quantity, product.stock) } 
+              : item);
+          }
+          return [...prev, { id: product.id, quantity: Math.min(quantity, product.stock) }];
+        });
+        showToast(LOCALES[lang].inCart + "!");
+      };
+
+      const removeFromCart = (id) => {
+        setCart(prev => prev.filter(item => item.id !== id));
+      };
+
+      const updateQuantity = (id, delta) => {
+        setCart(prev => prev.map(item => {
+          if(item.id === id) {
+            const product = MOCK_PRODUCTS.find(p => p.id === id);
+            const newQty = item.quantity + delta;
+            if(newQty < 1) return item;
+            if(product && newQty > product.stock) return item;
+            return { ...item, quantity: newQty };
+          }
+          return item;
+        }));
+      };
+
+      const clearCart = () => setCart([]);
+
+      // Favorites Toggle
+      const toggleFavorite = (productId) => {
+        setFavorites(prev => {
+          if (prev.includes(productId)) {
+            return prev.filter(id => id !== productId);
+          } else {
+            return [...prev, productId];
+          }
+        });
+      };
+
+      const t = LOCALES[lang];
+
+      return (
+        <AppContext.Provider value={{
+          lang, setLang, t,
+          theme, toggleTheme,
+          cart, addToCart, removeFromCart, updateQuantity, clearCart,
+          favorites, toggleFavorite,
+          orders, setOrders,
+          toast, showToast
+        }}>
+          {children}
+        </AppContext.Provider>
+      );
+    };
+
+    const useApp = () => useContext(AppContext);
+
+    const Header = ({ currentRoute, navigate }) => {
+      const { lang, setLang, t, cart, favorites, theme, toggleTheme } = useApp();
+      const [searchQuery, setSearchQuery] = useState('');
+      const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+      const [searchSuggestions, setSearchSuggestions] = useState([]);
+      const searchRef = useRef(null);
+
+      const totalCartCount = cart.reduce((acc, i) => acc + i.quantity, 0);
+
+      // Handle search input dynamic suggestions
+      const handleSearchChange = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+        if (query.trim().length > 1) {
+          const filtered = MOCK_PRODUCTS.filter(p => 
+            p.name[lang].toLowerCase().includes(query.toLowerCase()) ||
+            p.brand.toLowerCase().includes(query.toLowerCase())
+          ).slice(0, 5);
+          setSearchSuggestions(filtered);
+        } else {
+          setSearchSuggestions([]);
+        }
+      };
+
+      const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+          navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+          setSearchSuggestions([]);
+        }
+      };
+
+      return (
+        <header className="sticky top-0 z-50 shadow-sm glass-header transition-all">
+          {/* Top Utility Bar */}
+          <div className="bg-brand-black text-white text-xs py-2 px-4 sm:px-8">
+            <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1 text-gray-300">
+                  <i data-lucide="map-pin" className="w-3.5 h-3.5 text-brand-lime"></i>
+                  {t.deliveryTo} <strong className="text-white ml-1">{t.tashkent}</strong>
+                </span>
+                <span className="hidden md:inline text-gray-400">|</span>
+                <span className="hidden md:inline text-gray-300">{t.support}</span>
+              </div>
+              <div className="flex items-center gap-4">
+                {/* Theme Toggle (Light / Dark) */}
+                <button
+                  onClick={toggleTheme}
+                  title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                  aria-label="Toggle theme"
+                  className="flex items-center justify-center w-7 h-7 rounded bg-zinc-800 text-brand-lime hover:bg-zinc-700 transition-colors"
+                >
+                  {theme === 'dark' ? (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="4"/>
+                      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+                    </svg>
+                  ) : (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+                    </svg>
+                  )}
+                </button>
+
+                {/* Language Switcher Selector */}
+                <div className="flex items-center gap-1 bg-zinc-800 rounded px-2 py-0.5">
+                  <i data-lucide="globe" className="w-3.5 h-3.5 text-brand-lime"></i>
+                  {['uz', 'ru', 'en'].map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => setLang(l)}
+                      className={`px-1.5 py-0.5 text-xs font-semibold rounded uppercase transition-colors ${
+                        lang === l ? 'bg-brand-lime text-black' : 'text-gray-300 hover:text-white'
+                      }`}
+                    >
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Global Header */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+            {/* Logo */}
+            <a 
+              href="#/" 
+              onClick={(e) => { e.preventDefault(); navigate('/'); }}
+              className="flex items-center gap-2 group cursor-pointer"
+            >
+              <div className="w-10 h-10 bg-brand-black text-brand-lime flex items-center justify-center rounded-xl font-black text-2xl tracking-tighter group-hover:scale-105 transition-transform">
+                C
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-wider text-brand-black leading-none">
+                  CLICKGO<span className="text-brand-lime">.</span>
+                </span>
+                <span className="text-[9px] tracking-widest text-brand-textSecondary uppercase font-bold">Marketplace</span>
+              </div>
+            </a>
+
+            {/* Catalog Button Toggle */}
+            <div className="relative">
+              <button
+                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+                className="flex items-center gap-2 bg-brand-lime hover:bg-brand-limeHover text-black px-4 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm"
+              >
+                <i data-lucide={isCategoryOpen ? "x" : "grid"} className="w-4 h-4"></i>
+                <span className="hidden sm:inline">{t.catalog}</span>
+              </button>
+
+              {/* Mega Dropdown Menu */}
+              {isCategoryOpen && (
+                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-brand-border p-3 z-50 animate-fadeIn">
+                  <div className="text-xs font-bold uppercase text-brand-textSecondary px-3 py-2 border-b border-gray-100 mb-1">
+                    {t.allCategories}
+                  </div>
+                  {CATEGORIES.map(cat => (
+                    <a
+                      key={cat.id}
+                      href={`#/catalog/${cat.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsCategoryOpen(false);
+                        navigate(`/catalog/${cat.id}`);
+                      }}
+                      className="flex items-center justify-between px-3 py-2.5 hover:bg-brand-lightBg rounded-xl transition-colors group cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-8 h-8 ${cat.color} text-white rounded-lg flex items-center justify-center text-sm shadow-sm group-hover:scale-110 transition-transform`}>
+                          <i data-lucide={cat.icon} className="w-4 h-4"></i>
+                        </div>
+                        <span className="text-sm font-semibold text-brand-textPrimary group-hover:text-black">
+                          {cat.name[lang]}
+                        </span>
+                      </div>
+                      <i data-lucide="chevron-right" className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Search Input Bar with Autocomplete */}
+            <div className="flex-1 max-w-2xl relative" ref={searchRef}>
+              <form onSubmit={handleSearchSubmit} className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  placeholder={t.searchPlaceholder}
+                  className="w-full bg-brand-lightBg border border-brand-border rounded-xl py-2.5 pl-4 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-brand-black transition-all"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-black text-brand-lime px-3.5 rounded-lg flex items-center justify-center hover:bg-black transition-colors"
+                >
+                  <i data-lucide="search" className="w-4 h-4"></i>
+                </button>
+              </form>
+
+              {/* Suggestions Dropdown */}
+              {searchSuggestions.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-brand-border overflow-hidden z-50">
+                  {searchSuggestions.map(item => (
+                    <div
+                      key={item.id}
+                      onClick={() => {
+                        navigate(`/product/${item.id}`);
+                        setSearchSuggestions([]);
+                        setSearchQuery('');
+                      }}
+                      className="flex items-center gap-3 p-3 hover:bg-brand-lightBg cursor-pointer border-b border-gray-100 last:border-0"
+                    >
+                      <img src={item.image} alt="" className="w-10 h-10 object-cover rounded-lg" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-brand-textPrimary truncate">{item.name[lang]}</p>
+                        <p className="text-xs font-bold text-brand-black">{formatUZS(item.price)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons Shortcuts */}
+            <div className="flex items-center gap-2 sm:gap-4">
+              <button
+                onClick={() => navigate('/account')}
+                className="flex items-center gap-2 p-2 sm:px-3 sm:py-2 rounded-xl hover:bg-brand-lightBg transition-colors"
+                title={t.account}
+              >
+                <i data-lucide="user" className="w-5 h-5 text-brand-black"></i>
+                <span className="hidden md:inline text-xs font-bold">{t.account}</span>
+              </button>
+
+              <button
+                onClick={() => navigate('/catalog')}
+                className="relative p-2 sm:px-3 sm:py-2 rounded-xl hover:bg-brand-lightBg transition-colors"
+                title={t.favorites}
+              >
+                <i data-lucide="heart" className="w-5 h-5 text-brand-black"></i>
+                {favorites.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                    {favorites.length}
+                  </span>
+                )}
+                <span className="hidden md:inline text-xs font-bold ml-1.5">{t.favorites}</span>
+              </button>
+
+              <button
+                onClick={() => navigate('/cart')}
+                className="flex items-center gap-2 bg-brand-black text-white px-3.5 py-2.5 rounded-xl hover:bg-brand-deep transition-all relative group"
+              >
+                <div className="relative">
+                  <i data-lucide="shopping-bag" className="w-5 h-5 text-brand-lime"></i>
+                  {totalCartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-brand-lime text-black text-[10px] font-extrabold rounded-full w-4 h-4 flex items-center justify-center">
+                      {totalCartCount}
+                    </span>
+                  )}
+                </div>
+                <span className="hidden sm:inline text-xs font-bold ml-1">{t.cart}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Secondary Category Navigation Row */}
+          <div className="border-t border-brand-border bg-white hidden lg:block">
+            <div className="max-w-7xl mx-auto px-8 flex items-center gap-8 overflow-x-auto py-2.5 text-xs font-semibold text-brand-textPrimary">
+              {CATEGORIES.map(cat => (
+                <a
+                  key={cat.id}
+                  href={`#/catalog/${cat.id}`}
+                  onClick={(e) => { e.preventDefault(); navigate(`/catalog/${cat.id}`); }}
+                  className="hover:text-black whitespace-nowrap transition-colors flex items-center gap-1.5"
+                >
+                  <i data-lucide={cat.icon} className="w-3.5 h-3.5 text-gray-500"></i>
+                  {cat.name[lang]}
+                </a>
+              ))}
+            </div>
+          </div>
+        </header>
+      );
+    };
+
+    const ProductCard = ({ product, navigate }) => {
+      const { lang, t, addToCart, favorites, toggleFavorite } = useApp();
+      const isFav = favorites.includes(product.id);
+
+      return (
+        <div className="bg-white rounded-2xl border border-brand-border overflow-hidden card-hover flex flex-col justify-between relative group">
+          {/* Top Badges */}
+          <div className="absolute top-3 left-3 z-10 flex flex-col gap-1">
+            {product.discountPercentage > 0 && (
+              <span className="lime-badge text-[11px] px-2 py-0.5 rounded-md shadow-sm">
+                -{product.discountPercentage}%
+              </span>
+            )}
+            {product.isNew && (
+              <span className="bg-black text-white text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-md">
+                New
+              </span>
+            )}
+          </div>
+
+          {/* Favorite Toggle Button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); toggleFavorite(product.id); }}
+            className={`absolute top-3 right-3 z-10 p-2 rounded-full backdrop-blur-md transition-all shadow-sm ${
+              isFav ? 'bg-red-50 text-red-500' : 'bg-white/80 text-gray-400 hover:text-red-500'
+            }`}
+          >
+            <i data-lucide="heart" className={`w-4 h-4 ${isFav ? 'fill-current text-red-500' : ''}`}></i>
+          </button>
+
+          {/* Product Image */}
+          <div 
+            onClick={() => navigate(`/product/${product.id}`)}
+            className="w-full h-48 sm:h-56 overflow-hidden bg-brand-lightBg cursor-pointer relative"
+          >
+            <img 
+              src={product.image} 
+              alt={product.name[lang]}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Details Body */}
+          <div className="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
+                  {product.brand}
+                </span>
+                <div className="flex items-center text-amber-500 text-xs font-bold gap-1 ml-auto">
+                  <i data-lucide="star" className="w-3.5 h-3.5 fill-current"></i>
+                  <span>{product.rating}</span>
+                  <span className="text-gray-400 font-normal">({product.reviewCount})</span>
+                </div>
+              </div>
+
+              <h3 
+                onClick={() => navigate(`/product/${product.id}`)}
+                className="text-xs sm:text-sm font-bold text-brand-textPrimary line-clamp-2 cursor-pointer hover:text-black mb-3 leading-snug"
+              >
+                {product.name[lang]}
+              </h3>
+            </div>
+
+            {/* Price and Cart Button Row */}
+            <div>
+              {product.oldPrice && (
+                <p className="text-xs text-gray-400 line-through font-medium">
+                  {formatUZS(product.oldPrice)}
+                </p>
+              )}
+              <div className="flex items-center justify-between gap-2 mt-0.5">
+                <p className="text-sm sm:text-base font-black text-brand-black">
+                  {formatUZS(product.price)}
+                </p>
+                <button
+                  onClick={() => addToCart(product)}
+                  className="bg-brand-black hover:bg-brand-deep text-brand-lime p-2.5 rounded-xl transition-all hover:scale-105 flex items-center justify-center shadow-sm"
+                  title={t.addToCart}
+                >
+                  <i data-lucide="shopping-cart" className="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const HomePage = ({ navigate }) => {
+      const { lang, t } = useApp();
+      const [currentSlide, setCurrentSlide] = useState(0);
+
+      const HERO_SLIDES = [
+        {
+          id: 1,
+          title: lang === 'uz' ? "Yangi Avlod Texnologiyalari" : lang === 'ru' ? "Технологии Нового Поколения" : "Next-Gen Tech Arrival",
+          subtitle: lang === 'uz' ? "iPhone 15 Pro va Galaxy S24 Ultra rasmiy kafolat bilan" : lang === 'ru' ? "iPhone 15 Pro и Galaxy S24 Ultra с официальной гарантией" : "iPhone 15 Pro & Galaxy S24 Ultra with warranty",
+          badge: "SUPER OFFER",
+          btnText: t.continueShopping,
+          bg: "bg-brand-black",
+          image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80"
+        },
+        {
+          id: 2,
+          title: lang === 'uz' ? "Uyingiz Uchun Zamonaviy Maishiy Texnika" : lang === 'ru' ? "Бытовая Техника Для Вашего Дома" : "Modern Smart Home Appliances",
+          subtitle: lang === 'uz' ? "Dyson, Samsung va Xiaomi tovarlariga 20% gacha chegirmalar" : lang === 'ru' ? "Скидки до 20% на технику Dyson, Samsung и Xiaomi" : "Up to 20% off on Dyson, Samsung & Xiaomi",
+          badge: "LIMITED DEAL",
+          btnText: t.continueShopping,
+          bg: "bg-zinc-900",
+          image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=1200&q=80"
+        }
+      ];
+
+      useEffect(() => {
+        const timer = setInterval(() => {
+          setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+        }, 5000);
+        return () => clearInterval(timer);
+      }, []);
+
+      const popularProducts = useMemo(() => MOCK_PRODUCTS.filter(p => p.isPopular).slice(0, 8), []);
+      const newProducts = useMemo(() => MOCK_PRODUCTS.filter(p => p.isNew).slice(0, 8), []);
+
+      return (
+        <div className="space-y-12 pb-16">
+          {/* Hero Slider */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-6">
+            <div className="relative h-[340px] sm:h-[420px] rounded-3xl overflow-hidden shadow-2xl bg-brand-black text-white flex items-center">
+              <img 
+                src={HERO_SLIDES[currentSlide].image} 
+                alt="" 
+                className="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity duration-700"
+              />
+              <div className="relative z-10 p-6 sm:p-12 max-w-xl space-y-4">
+                <span className="lime-badge text-xs px-3 py-1 rounded-full uppercase tracking-wider font-extrabold inline-block">
+                  {HERO_SLIDES[currentSlide].badge}
+                </span>
+                <h1 className="text-2xl sm:text-4xl font-black leading-tight">
+                  {HERO_SLIDES[currentSlide].title}
+                </h1>
+                <p className="text-xs sm:text-base text-gray-300 font-medium">
+                  {HERO_SLIDES[currentSlide].subtitle}
+                </p>
+                <button 
+                  onClick={() => navigate('/catalog')}
+                  className="lime-btn px-6 py-3 rounded-xl text-sm font-black flex items-center gap-2 shadow-lg"
+                >
+                  <span>{HERO_SLIDES[currentSlide].btnText}</span>
+                  <i data-lucide="arrow-right" className="w-4 h-4"></i>
+                </button>
+              </div>
+
+              {/* Slider Dots */}
+              <div className="absolute bottom-4 right-6 flex gap-2 z-20">
+                {HERO_SLIDES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`h-2.5 rounded-full transition-all ${
+                      currentSlide === idx ? 'w-8 bg-brand-lime' : 'w-2.5 bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Category Shortcuts Grid */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+            <h2 className="text-xl font-extrabold text-brand-black mb-6 flex items-center gap-2">
+              <i data-lucide="layout-grid" className="w-5 h-5 text-brand-lime fill-brand-black"></i>
+              {t.allCategories}
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
+              {CATEGORIES.map(cat => (
+                <div
+                  key={cat.id}
+                  onClick={() => navigate(`/catalog/${cat.id}`)}
+                  className="bg-white p-4 rounded-2xl border border-brand-border hover:border-black cursor-pointer text-center transition-all card-hover flex flex-col items-center gap-2"
+                >
+                  <div className={`w-12 h-12 ${cat.color} text-white rounded-xl flex items-center justify-center shadow-sm`}>
+                    <i data-lucide={cat.icon} className="w-6 h-6"></i>
+                  </div>
+                  <span className="text-xs font-bold text-brand-textPrimary line-clamp-1">{cat.name[lang]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Popular Products Carousel / Grid */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-extrabold text-brand-black flex items-center gap-2">
+                <i data-lucide="flame" className="w-5 h-5 text-orange-500 fill-current"></i>
+                {t.popularNow}
+              </h2>
+              <button 
+                onClick={() => navigate('/catalog')}
+                className="text-xs font-bold text-black hover:underline flex items-center gap-1"
+              >
+                <span>{t.continueShopping}</span>
+                <i data-lucide="chevron-right" className="w-4 h-4"></i>
+              </button>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {popularProducts.map(product => (
+                <ProductCard key={product.id} product={product} navigate={navigate} />
+              ))}
+            </div>
+          </div>
+
+          {/* New Arrivals Section */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-extrabold text-brand-black flex items-center gap-2">
+                <i data-lucide="sparkles" className="w-5 h-5 text-brand-lime fill-brand-black"></i>
+                {t.newArrivals}
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {newProducts.map(product => (
+                <ProductCard key={product.id} product={product} navigate={navigate} />
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const CatalogPage = ({ categorySlug, navigate }) => {
+      const { lang, t } = useApp();
+      const [selectedCat, setSelectedCat] = useState(categorySlug || 'all');
+      const [sortBy, setSortBy] = useState('popular');
+      const [priceMin, setPriceMin] = useState('');
+      const [priceMax, setPriceMax] = useState('');
+      const [selectedBrand, setSelectedBrand] = useState('all');
+
+      useEffect(() => {
+        if(categorySlug) setSelectedCat(categorySlug);
+      }, [categorySlug]);
+
+      // Unique brands list
+      const brands = useMemo(() => Array.from(new Set(MOCK_PRODUCTS.map(p => p.brand))), []);
+
+      // Filter Logic
+      const filteredProducts = useMemo(() => {
+        return MOCK_PRODUCTS.filter(product => {
+          if (selectedCat !== 'all' && product.categoryId !== selectedCat) return false;
+          if (selectedBrand !== 'all' && product.brand !== selectedBrand) return false;
+          if (priceMin && product.price < Number(priceMin)) return false;
+          if (priceMax && product.price > Number(priceMax)) return false;
+          return true;
+        }).sort((a, b) => {
+          if (sortBy === 'price-low') return a.price - b.price;
+          if (sortBy === 'price-high') return b.price - a.price;
+          if (sortBy === 'newest') return b.id - a.id;
+          return b.reviewCount - a.reviewCount;
+        });
+      }, [selectedCat, selectedBrand, priceMin, priceMax, sortBy]);
+
+      return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
+          {/* Breadcrumb Header */}
+          <div className="flex items-center gap-2 text-xs text-brand-textSecondary font-medium">
+            <a href="#/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="hover:text-black">Bosh sahifa</a>
+            <span>/</span>
+            <span className="text-black font-bold">{t.catalog}</span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Sidebar Filter Drawer */}
+            <div className="bg-white p-5 rounded-2xl border border-brand-border h-fit space-y-6">
+              <div className="flex items-center justify-between border-b pb-3">
+                <h3 className="font-extrabold text-sm text-brand-black flex items-center gap-2">
+                  <i data-lucide="sliders-horizontal" className="w-4 h-4"></i>
+                  {t.filter}
+                </h3>
+                <button 
+                  onClick={() => { setSelectedCat('all'); setSelectedBrand('all'); setPriceMin(''); setPriceMax(''); }}
+                  className="text-xs text-red-500 font-bold hover:underline"
+                >
+                  {t.clearFilters}
+                </button>
+              </div>
+
+              {/* Categories Filter */}
+              <div>
+                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">{t.catalog}</label>
+                <select 
+                  value={selectedCat} 
+                  onChange={(e) => setSelectedCat(e.target.value)}
+                  className="w-full bg-brand-lightBg border border-brand-border rounded-xl p-2.5 text-xs font-bold"
+                >
+                  <option value="all">{t.allCategories}</option>
+                  {CATEGORIES.map(c => (
+                    <option key={c.id} value={c.id}>{c.name[lang]}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Brand Filter */}
+              <div>
+                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">Brend</label>
+                <select 
+                  value={selectedBrand} 
+                  onChange={(e) => setSelectedBrand(e.target.value)}
+                  className="w-full bg-brand-lightBg border border-brand-border rounded-xl p-2.5 text-xs font-bold"
+                >
+                  <option value="all">Barcha brendlar</option>
+                  {brands.map(b => (
+                    <option key={b} value={b}>{b}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Price Range */}
+              <div>
+                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2">{t.price}</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <input 
+                    type="number" 
+                    placeholder="Min UZS" 
+                    value={priceMin}
+                    onChange={(e) => setPriceMin(e.target.value)}
+                    className="bg-brand-lightBg border border-brand-border rounded-xl p-2 text-xs"
+                  />
+                  <input 
+                    type="number" 
+                    placeholder="Max UZS" 
+                    value={priceMax}
+                    onChange={(e) => setPriceMax(e.target.value)}
+                    className="bg-brand-lightBg border border-brand-border rounded-xl p-2 text-xs"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Catalog Main View */}
+            <div className="lg:col-span-3 space-y-4">
+              {/* Toolbar */}
+              <div className="bg-white p-4 rounded-2xl border border-brand-border flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs font-bold text-brand-textSecondary">
+                  Topilgan mahsulotlar: <strong className="text-black">{filteredProducts.length}</strong>
+                </span>
+
+                {/* Sort dropdown */}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-gray-400">{t.sortBy}:</span>
+                  <select 
+                    value={sortBy} 
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="bg-brand-lightBg border border-brand-border rounded-xl px-3 py-1.5 text-xs font-bold"
+                  >
+                    <option value="popular">{t.sortPopularity}</option>
+                    <option value="price-low">{t.sortPriceLow}</option>
+                    <option value="price-high">{t.sortPriceHigh}</option>
+                    <option value="newest">{t.sortNewest}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Products Grid */}
+              {filteredProducts.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {filteredProducts.map(product => (
+                    <ProductCard key={product.id} product={product} navigate={navigate} />
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-white p-12 text-center rounded-2xl border border-brand-border space-y-4">
+                  <i data-lucide="package-x" className="w-12 h-12 text-gray-300 mx-auto"></i>
+                  <p className="text-sm font-bold text-gray-500">Afsuski, filtrlarga mos keladigan mahsulot topilmadi.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const ProductPage = ({ productId, navigate }) => {
+      const { lang, t, addToCart, favorites, toggleFavorite } = useApp();
+      const product = useMemo(() => MOCK_PRODUCTS.find(p => p.id === Number(productId)), [productId]);
+      const [selectedImg, setSelectedImg] = useState('');
+      const [qty, setQty] = useState(1);
+
+      useEffect(() => {
+        if (product) setSelectedImg(product.image);
+      }, [product]);
+
+      if (!product) {
+        return (
+          <div className="max-w-7xl mx-auto px-8 py-20 text-center space-y-4">
+            <h2 className="text-xl font-bold">Mahsulot topilmadi</h2>
+            <button onClick={() => navigate('/')} className="black-btn px-6 py-2 rounded-xl text-xs font-bold">
+              {t.continueShopping}
+            </button>
+          </div>
+        );
+      }
+
+      const isFav = favorites.includes(product.id);
+
+      return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-8">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-xs text-brand-textSecondary font-medium">
+            <a href="#/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="hover:text-black">Bosh sahifa</a>
+            <span>/</span>
+            <a href="#/catalog" onClick={(e) => { e.preventDefault(); navigate('/catalog'); }} className="hover:text-black">{t.catalog}</a>
+            <span>/</span>
+            <span className="text-black font-bold truncate max-w-xs">{product.name[lang]}</span>
+          </div>
+
+          <div className="bg-white rounded-3xl border border-brand-border p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
+            {/* Image Gallery */}
+            <div className="space-y-4">
+              <div className="h-80 sm:h-96 w-full rounded-2xl overflow-hidden bg-brand-lightBg border border-brand-border flex items-center justify-center p-4">
+                <img src={selectedImg || product.image} alt="" className="max-h-full max-w-full object-contain" />
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {[product.image, ...(product.gallery || [])].map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedImg(img)}
+                    className={`w-16 h-16 rounded-xl border-2 overflow-hidden flex-shrink-0 ${
+                      selectedImg === img ? 'border-brand-black' : 'border-transparent'
+                    }`}
+                  >
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Product Meta Details */}
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-extrabold uppercase text-gray-400 bg-gray-100 px-2.5 py-1 rounded-md">
+                  {product.brand}
+                </span>
+                <h1 className="text-xl sm:text-2xl font-black text-brand-black mt-2 leading-snug">
+                  {product.name[lang]}
+                </h1>
+                <div className="flex items-center gap-4 mt-3 text-xs font-bold text-gray-500">
+                  <div className="flex items-center text-amber-500 gap-1">
+                    <i data-lucide="star" className="w-4 h-4 fill-current"></i>
+                    <span>{product.rating}</span>
+                    <span className="text-gray-400">({product.reviewCount} {t.reviews})</span>
+                  </div>
+                  <span>•</span>
+                  <span className="text-green-600 font-bold">{t.inStock}: {product.stock} dona</span>
+                </div>
+              </div>
+
+              {/* Price Box */}
+              <div className="bg-brand-lightBg p-4 rounded-2xl border border-brand-border space-y-1">
+                {product.oldPrice && (
+                  <span className="text-xs text-gray-400 line-through font-medium">
+                    {formatUZS(product.oldPrice)}
+                  </span>
+                )}
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl font-black text-brand-black">{formatUZS(product.price)}</span>
+                  {product.discountPercentage > 0 && (
+                    <span className="lime-badge text-xs px-2 py-0.5 rounded-md font-extrabold">
+                      -{product.discountPercentage}%
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Quantity Selector & Action Buttons */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <span className="text-xs font-bold text-gray-500 uppercase">Soni:</span>
+                  <div className="flex items-center border border-brand-border rounded-xl bg-white overflow-hidden">
+                    <button 
+                      onClick={() => setQty(Math.max(1, qty - 1))}
+                      className="px-3 py-1.5 hover:bg-gray-100 font-bold"
+                    >-</button>
+                    <span className="px-4 py-1.5 text-xs font-black">{qty}</span>
+                    <button 
+                      onClick={() => setQty(Math.min(product.stock, qty + 1))}
+                      className="px-3 py-1.5 hover:bg-gray-100 font-bold"
+                    >+</button>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => addToCart(product, qty)}
+                    className="flex-1 lime-btn py-3.5 px-6 rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-sm"
+                  >
+                    <i data-lucide="shopping-bag" className="w-4 h-4"></i>
+                    <span>{t.addToCart}</span>
+                  </button>
+
+                  <button
+                    onClick={() => toggleFavorite(product.id)}
+                    className={`p-3.5 rounded-xl border border-brand-border flex items-center justify-center transition-colors ${
+                      isFav ? 'bg-red-50 text-red-500 border-red-200' : 'hover:bg-gray-50'
+                    }`}
+                  >
+                    <i data-lucide="heart" className={`w-5 h-5 ${isFav ? 'fill-current' : ''}`}></i>
+                  </button>
+                </div>
+              </div>
+
+              {/* Perks info */}
+              <div className="border-t pt-4 space-y-2 text-xs font-medium text-gray-600">
+                <div className="flex items-center gap-2">
+                  <i data-lucide="shield-check" className="w-4 h-4 text-green-600"></i>
+                  <span>{t.guarantee}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <i data-lucide="truck" className="w-4 h-4 text-brand-black"></i>
+                  <span>{t.fastDelivery}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Description & Specs Tabs */}
+          <div className="bg-white rounded-3xl border border-brand-border p-6 lg:p-8 space-y-6">
+            <h3 className="text-lg font-black text-brand-black border-b pb-3">{t.specs} & {t.description}</h3>
+            <p className="text-sm text-brand-textPrimary leading-relaxed">
+              {product.description[lang]}
+            </p>
+            {product.specs && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                {Object.entries(product.specs).map(([k, v]) => (
+                  <div key={k} className="flex justify-between p-3 bg-brand-lightBg rounded-xl text-xs">
+                    <span className="font-bold text-gray-500">{k}</span>
+                    <span className="font-extrabold text-black">{v}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const CartPage = ({ navigate }) => {
+      const { lang, t, cart, removeFromCart, updateQuantity, clearCart } = useApp();
+
+      const cartDetailed = useMemo(() => {
+        return cart.map(item => {
+          const product = MOCK_PRODUCTS.find(p => p.id === item.id);
+          return { ...item, product };
+        }).filter(item => item.product !== undefined);
+      }, [cart]);
+
+      const subtotal = useMemo(() => {
+        return cartDetailed.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+      }, [cartDetailed]);
+
+      if (cartDetailed.length === 0) {
+        return (
+          <div className="max-w-2xl mx-auto px-4 py-20 text-center space-y-4">
+            <div className="w-20 h-20 bg-brand-lightBg rounded-full flex items-center justify-center mx-auto text-gray-400">
+              <i data-lucide="shopping-bag" className="w-10 h-10"></i>
+            </div>
+            <h2 className="text-xl font-extrabold text-brand-black">{t.emptyCart}</h2>
+            <p className="text-xs text-gray-500">{t.emptyCartSub}</p>
+            <button 
+              onClick={() => navigate('/catalog')}
+              className="black-btn px-6 py-3 rounded-xl text-xs font-extrabold"
+            >
+              {t.continueShopping}
+            </button>
+          </div>
+        );
+      }
+
+      return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6">
+          <h1 className="text-2xl font-black text-brand-black flex items-center gap-2">
+            <i data-lucide="shopping-bag" className="w-6 h-6 text-brand-lime fill-brand-black"></i>
+            {t.cart} ({cartDetailed.length})
+          </h1>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Cart Line Items */}
+            <div className="lg:col-span-2 space-y-4">
+              {cartDetailed.map(({ id, quantity, product }) => (
+                <div key={id} className="bg-white p-4 rounded-2xl border border-brand-border flex gap-4 items-center">
+                  <img src={product.image} alt="" className="w-20 h-20 object-cover rounded-xl bg-brand-lightBg" />
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <h3 className="text-xs sm:text-sm font-bold text-brand-black line-clamp-1">{product.name[lang]}</h3>
+                    <p className="text-xs font-black text-brand-black">{formatUZS(product.price)}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center border border-brand-border rounded-lg bg-white overflow-hidden text-xs font-bold">
+                      <button onClick={() => updateQuantity(id, -1)} className="px-2.5 py-1 hover:bg-gray-100">-</button>
+                      <span className="px-2">{quantity}</span>
+                      <button onClick={() => updateQuantity(id, 1)} className="px-2.5 py-1 hover:bg-gray-100">+</button>
+                    </div>
+                    <button onClick={() => removeFromCart(id)} className="p-2 text-gray-400 hover:text-red-500">
+                      <i data-lucide="trash-2" className="w-4 h-4"></i>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Order Summary Box */}
+            <div className="bg-white p-6 rounded-3xl border border-brand-border h-fit space-y-4">
+              <h3 className="text-base font-black text-brand-black border-b pb-3">{t.orderSummary}</h3>
+              <div className="space-y-2 text-xs font-bold">
+                <div className="flex justify-between text-gray-500">
+                  <span>{t.subtotal}</span>
+                  <span className="text-black">{formatUZS(subtotal)}</span>
+                </div>
+                <div className="flex justify-between text-gray-500">
+                  <span>{t.deliveryFee}</span>
+                  <span className="text-green-600 font-extrabold">{t.free}</span>
+                </div>
+              </div>
+              <div className="border-t pt-3 flex justify-between items-center text-sm font-black">
+                <span>{t.total}</span>
+                <span className="text-lg text-brand-black">{formatUZS(subtotal)}</span>
+              </div>
+              <button
+                onClick={() => navigate('/checkout')}
+                className="w-full lime-btn py-3.5 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-sm"
+              >
+                <span>{t.checkout}</span>
+                <i data-lucide="arrow-right" className="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    /* Demo Checkout Component */
+    const CheckoutPage = ({ navigate }) => {
+      const { t, cart, clearCart, orders, setOrders } = useApp();
+      const [formData, setFormData] = useState({
+        fullName: '',
+        phone: '+998 ',
+        city: 'Toshkent',
+        address: '',
+        payment: 'cash'
+      });
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [createdOrderId, setCreatedOrderId] = useState('');
+
+      const subtotal = useMemo(() => {
+        return cart.reduce((acc, item) => {
+          const product = MOCK_PRODUCTS.find(p => p.id === item.id);
+          return acc + (product ? product.price * item.quantity : 0);
+        }, 0);
+      }, [cart]);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const newOrderId = `CGO-${Math.floor(10000 + Math.random() * 90000)}`;
+        const newOrder = {
+          id: newOrderId,
+          date: new Date().toISOString().split('T')[0],
+          total: subtotal,
+          status: "Processing",
+          items: cart.map(item => {
+            const product = MOCK_PRODUCTS.find(p => p.id === item.id);
+            return { id: item.id, name: product?.name['uz'] || '', quantity: item.quantity, price: product?.price || 0 };
+          })
+        };
+
+        setOrders([newOrder, ...orders]);
+        setCreatedOrderId(newOrderId);
+        setIsSubmitted(true);
+        clearCart();
+      };
+
+      if (isSubmitted) {
+        return (
+          <div className="max-w-md mx-auto px-4 py-16 text-center space-y-6">
+            <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
+              <i data-lucide="check-circle-2" className="w-10 h-10"></i>
+            </div>
+            <h2 className="text-xl font-black text-brand-black">{t.orderSuccess}</h2>
+            <p className="text-xs text-gray-500 font-bold">{t.orderNumber} <span className="text-black">{createdOrderId}</span></p>
+            <p className="text-[11px] text-amber-600 bg-amber-50 p-3 rounded-xl border border-amber-200">{t.demoWarning}</p>
+            <button 
+              onClick={() => navigate('/account')}
+              className="black-btn w-full py-3 rounded-xl text-xs font-black"
+            >
+              {t.ordersHistory}
+            </button>
+          </div>
+        );
+      }
+
+      return (
+        <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+          <h1 className="text-2xl font-black text-brand-black">{t.checkoutTitle}</h1>
+          <form onSubmit={handleSubmit} className="bg-white p-6 rounded-3xl border border-brand-border space-y-4">
+            <div>
+              <label className="text-xs font-bold text-gray-500 block mb-1">{t.fullName}</label>
+              <input 
+                required 
+                type="text" 
+                value={formData.fullName} 
+                onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                className="w-full bg-brand-lightBg border rounded-xl p-2.5 text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-gray-500 block mb-1">{t.phone}</label>
+              <input 
+                required 
+                type="text" 
+                value={formData.phone} 
+                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                className="w-full bg-brand-lightBg border rounded-xl p-2.5 text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-gray-500 block mb-1">{t.address}</label>
+              <input 
+                required 
+                type="text" 
+                value={formData.address} 
+                onChange={(e) => setFormData({...formData, address: e.target.value})}
+                className="w-full bg-brand-lightBg border rounded-xl p-2.5 text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-gray-500 block mb-1">{t.paymentMethod}</label>
+              <select 
+                value={formData.payment} 
+                onChange={(e) => setFormData({...formData, payment: e.target.value})}
+                className="w-full bg-brand-lightBg border rounded-xl p-2.5 text-xs font-bold"
+              >
+                <option value="cash">{t.cashOnDelivery}</option>
+                <option value="card">{t.cardSimulation}</option>
+              </select>
+            </div>
+            <div className="border-t pt-4 flex justify-between items-center">
+              <span className="text-sm font-black">{t.total}: {formatUZS(subtotal)}</span>
+              <button type="submit" className="lime-btn px-6 py-3 rounded-xl font-black text-xs">
+                {t.placeOrder}
+              </button>
+            </div>
+          </form>
+        </div>
+      );
+    };
+
+    /* Demo Account Page */
+    const AccountPage = ({ navigate }) => {
+      const { t, orders } = useApp();
+
+      return (
+        <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+          <h1 className="text-2xl font-black text-brand-black">{t.account}</h1>
+          <div className="bg-white p-6 rounded-3xl border border-brand-border space-y-6">
+            <h3 className="text-base font-black border-b pb-3">{t.ordersHistory}</h3>
+            {orders.length === 0 ? (
+              <p className="text-xs text-gray-400">Buyurtmalar hali mavjud emas</p>
+            ) : (
+              <div className="space-y-4">
+                {orders.map(order => (
+                  <div key={order.id} className="p-4 bg-brand-lightBg rounded-2xl border border-brand-border flex justify-between items-center text-xs">
+                    <div>
+                      <p className="font-extrabold text-black">{order.id}</p>
+                      <p className="text-gray-400">{order.date}</p>
+                    </div>
+                    <div className="text-right">
+                      <span className="lime-badge text-[10px] px-2 py-0.5 rounded uppercase">{order.status}</span>
+                      <p className="font-black text-black mt-1">{formatUZS(order.total)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const Footer = () => {
+      const { t } = useApp();
+      return (
+        <footer className="bg-brand-black text-white border-t border-zinc-800 py-12 px-4 sm:px-8 mt-auto">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-xs">
+            <div className="space-y-3">
+              <span className="text-2xl font-black tracking-wider text-white">
+                CLICKGO<span className="text-brand-lime">.</span>
+              </span>
+              <p className="text-gray-400 leading-relaxed">
+                Oʻzbekistondagi eng zamonaviy va qulay online marketplace platformasi.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-extrabold text-white uppercase tracking-wider mb-3">Xaridorlarga</h4>
+              <ul className="space-y-2 text-gray-400 font-medium">
+                <li><a href="#/catalog" className="hover:text-white">Katalog</a></li>
+                <li><a href="#/cart" className="hover:text-white">Savat</a></li>
+                <li><a href="#/account" className="hover:text-white">Akkount</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-extrabold text-white uppercase tracking-wider mb-3">Kompaniya</h4>
+              <ul className="space-y-2 text-gray-400 font-medium">
+                <li><a href="#/" className="hover:text-white">Biz haqimizda</a></li>
+                <li><a href="#/" className="hover:text-white">Aloqa va qo'llab-quvvatlash</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-extrabold text-white uppercase tracking-wider mb-3">Bogʻlanish</h4>
+              <p className="text-gray-400">+998 71 200-00-00</p>
+              <p className="text-gray-400">Toshkent q., Amir Temur shoh ko'chasi 108</p>
+            </div>
+          </div>
+          <div className="max-w-7xl mx-auto border-t border-zinc-800 mt-8 pt-6 text-center text-gray-500 text-[11px]">
+            © 2026 ClickGo Marketplace. Barcha huquqlar himoyalangan.
+          </div>
+        </footer>
+      );
+    };
+
+    // Toast Popup Widget
+    const Toast = ({ message }) => {
+      if (!message) return null;
+      return (
+        <div className="fixed bottom-6 right-6 z-50 bg-brand-black text-brand-lime font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2 text-xs border border-brand-lime animate-bounce">
+          <i data-lucide="check-circle" className="w-4 h-4"></i>
+          <span>{message}</span>
+        </div>
+      );
+    };
+
+    // Main App Shell with Hash Router Navigation
+    const MainApp = () => {
+      const [currentRoute, setCurrentRoute] = useState(() => window.location.hash || '#/');
+      const { toast } = useApp();
+
+      useEffect(() => {
+        const handleHashChange = () => {
+          setCurrentRoute(window.location.hash || '#/');
+          window.scrollTo(0, 0);
+        };
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+      }, []);
+
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      });
+
+      const navigate = (path) => {
+        window.location.hash = '#' + path;
+      };
+
+      // Simple Route Switcher
+      const renderRoute = () => {
+        const hash = currentRoute.replace('#', '') || '/';
+
+        if (hash === '/' || hash === '') return <HomePage navigate={navigate} />;
+        if (hash.startsWith('/catalog/')) {
+          const cat = hash.replace('/catalog/', '');
+          return <CatalogPage categorySlug={cat} navigate={navigate} />;
+        }
+        if (hash === '/catalog') return <CatalogPage navigate={navigate} />;
+        if (hash.startsWith('/product/')) {
+          const id = hash.replace('/product/', '');
+          return <ProductPage productId={id} navigate={navigate} />;
+        }
+        if (hash === '/cart') return <CartPage navigate={navigate} />;
+        if (hash === '/checkout') return <CheckoutPage navigate={navigate} />;
+        if (hash === '/account') return <AccountPage navigate={navigate} />;
+
+        return <HomePage navigate={navigate} />;
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col justify-between">
+          <div>
+            <Header currentRoute={currentRoute} navigate={navigate} />
+            <main>{renderRoute()}</main>
+          </div>
+          <Footer />
+          <Toast message={toast} />
+        </div>
+      );
+    };
+
+    // Render Mount Root
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+      <AppProvider>
+        <MainApp />
+      </AppProvider>
+    );
+  </script>
+</body>
+</html>
